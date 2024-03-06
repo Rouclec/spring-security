@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/auth/**")
                                 .permitAll()
-                                .requestMatchers("/restricted/**")
+                                .requestMatchers("/restricted/**","/users/**")
                                 .hasAnyAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()

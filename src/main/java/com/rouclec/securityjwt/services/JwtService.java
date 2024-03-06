@@ -18,7 +18,6 @@ public class JwtService {
 
     @Value("${secret-key}")
     private String SECRET_KEY;
-//    private final String SECRET_KEY = "b3521e1955f01eab8b688018195a56e669882936c0f626b422fb84f9ec1e1b36";
 
     //get the actual data from the token
     private Claims extractAllClaims(String token){

@@ -25,6 +25,8 @@ public class User implements UserDetails { //implement user details for spring s
     private Long id;
     private String firstname;
     private String lastname;
+
+    @Column(unique = true)
     private String email;
     private String password;
 
