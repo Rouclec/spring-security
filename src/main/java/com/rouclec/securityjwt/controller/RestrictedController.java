@@ -1,7 +1,9 @@
 package com.rouclec.securityjwt.controller;
 
 import com.rouclec.securityjwt.Mappers.impl.UserMapperImp;
-import com.rouclec.securityjwt.domain.dto.UserDto;
+import com.rouclec.securityjwt.Mappers.impl.UserResponseMapper;
+import com.rouclec.securityjwt.domain.dto.UserRequest;
+import com.rouclec.securityjwt.domain.dto.UserResponse;
 import com.rouclec.securityjwt.domain.entity.User;
 import com.rouclec.securityjwt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,13 @@ import java.util.stream.Collectors;
 public class RestrictedController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserMapperImp userMapper;
+    private UserMapperImp userMapper;
+
+    @Autowired
+    private UserResponseMapper userResponseMapper;
 
     @GetMapping("/restricted")
     public ResponseEntity<String> sayHelloAdmin(){
@@ -28,15 +33,15 @@ public class RestrictedController {
     }
 
     @GetMapping("/users")
-    public List<UserDto> getAllUsers(){
+    public List<UserResponse> getAllUsers(){
         List<User> users = userService.getAll();
         return users.stream()
-                .map(userMapper::mapTo)
+                .map(userResponseMapper::mapTo)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/users/{id}")
-    public UserDto getUser(@PathVariable("id") Long id){
-        return userMapper.mapTo(userService.get(id));
+    public UserResponse getUser(@PathVariable("id") Long id){
+        return userResponseMapper.mapTo(userService.get(id));
     }
 }

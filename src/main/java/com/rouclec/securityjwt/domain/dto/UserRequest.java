@@ -1,8 +1,6 @@
 package com.rouclec.securityjwt.domain.dto;
 
 import com.rouclec.securityjwt.domain.entity.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class UserDto {
+public class UserRequest {
 
     private Long id;
     @NotNull(message = "Please enter your firstname")

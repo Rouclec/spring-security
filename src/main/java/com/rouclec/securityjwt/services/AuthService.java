@@ -2,7 +2,7 @@ package com.rouclec.securityjwt.services;
 
 import com.rouclec.securityjwt.Mappers.impl.UserMapperImp;
 import com.rouclec.securityjwt.domain.dto.AuthResponse;
-import com.rouclec.securityjwt.domain.dto.UserDto;
+import com.rouclec.securityjwt.domain.dto.UserRequest;
 import com.rouclec.securityjwt.domain.entity.User;
 import com.rouclec.securityjwt.repositories.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -32,7 +32,7 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthResponse register(UserDto request, HttpServletResponse response){
+    public AuthResponse register(UserRequest request, HttpServletResponse response){
         User user = userMapperImp.MapFrom(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
@@ -45,7 +45,7 @@ public class AuthService {
 
     }
 
-    public  AuthResponse login(UserDto request, HttpServletResponse response){
+    public  AuthResponse login(UserRequest request, HttpServletResponse response){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

@@ -1,7 +1,7 @@
 package com.rouclec.securityjwt.controller;
 
 import com.rouclec.securityjwt.domain.dto.AuthResponse;
-import com.rouclec.securityjwt.domain.dto.UserDto;
+import com.rouclec.securityjwt.domain.dto.UserRequest;
 import com.rouclec.securityjwt.services.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -20,12 +20,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> signup(@RequestBody @Valid UserDto request, HttpServletResponse response){
+    public ResponseEntity<AuthResponse> signup(@RequestBody @Valid UserRequest request, HttpServletResponse response){
         return ResponseEntity.ok(authService.register(request, response));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody UserDto request, HttpServletResponse response){
+    public ResponseEntity<AuthResponse> login(@RequestBody UserRequest request, HttpServletResponse response){
         return  ResponseEntity.ok(authService.login(request, response));
     }
 }
